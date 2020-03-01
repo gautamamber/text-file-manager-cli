@@ -32,14 +32,28 @@ def validate_file(file_name):
     return
 
 
+def read(args):
+    """
+    get the file name and path and read
+    """
+    file_name = args.read[0]
+    # validate the file
+    validate_file(file_name)
+    with open(file_name, 'r') as file:
+        print(file.read())
 
 
+def main():
+    """
+    Create parser object
+    """
+    parser = argparse.ArgumentParser(description="A text file manager CLI")
+    parser.add_argument('-r', '--read', type=str, nargs=1, metavar="file_name", default=None,
+                        help="Open and read a specific file")
+    args = parser.parse_args()
+    if args.read is not None:
+        read(args)
 
 
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
